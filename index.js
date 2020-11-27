@@ -1,6 +1,6 @@
 const express = require('express');
-const indexRouter = require('./routes/index-controller');
-const contactoRouter = require('./routes/contacto-controller');
+const indexRouter = require('./routes/server-controller');
+const usuarioRouter = require('./routes/usuario-controller');
 
 const logger = require('morgan');
 const cors = require('cors');
@@ -14,7 +14,7 @@ app.use(logger('dev'));
 app.use(cors());
 
 app.use('/', indexRouter);
-app.use('/contactos', contactoRouter);
+app.use('/usuarios', usuarioRouter);
 
 const port = 3000;
 app.listen(port, ()=>console.log("Listening on port "+port));
