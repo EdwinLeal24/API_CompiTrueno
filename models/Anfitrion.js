@@ -5,8 +5,8 @@ module.exports = (sequelize, DataTypes) => {
    
     descripcion: DataTypes.STRING,
     ciudad: DataTypes.STRING,
-    pais_id: DataTypes.INT,
-    usuario_id: DataTypes.INT
+    pais_id: DataTypes.INTEGER,
+    usuario_id: DataTypes.INTEGER
   
   }, { tableName: 'anfitrion', timestamps: false });
   

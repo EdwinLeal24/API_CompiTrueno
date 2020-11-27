@@ -22,3 +22,5 @@ router.get('/', (req, res, next) => {
         .then(lista => res.json({ ok: true, data: lista }))
         .catch(err => res.json({ ok: false, error: err }));
 });
+
+module.exports = router;
