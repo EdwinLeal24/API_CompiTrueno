@@ -1,6 +1,13 @@
 const express = require('express');
 const indexRouter = require('./routes/server-controller');
 const usuarioRouter = require('./routes/usuario-controller');
+const paisRouter = require('./routes/pais-controller');
+const reviewRouter = require('./routes/experiencia-controller');
+const vistaReviewRouter = require('./routes/vista-experiencia-controller');
+const vistaAnfitrionRouter = require('./routes/vista-anfitrion-controller');
+const vistaViajerosRouter = require('./routes/vista-viajeros-controller');
+const comentarioRouter = require('./routes/comentario-controller');
+const fotoRouter = require('./routes/foto-controller');
 
 const logger = require('morgan');
 const cors = require('cors');
@@ -15,6 +22,13 @@ app.use(cors());
 
 app.use('/', indexRouter);
 app.use('/usuarios', usuarioRouter);
+app.use('/paises', paisRouter);
+app.use('/experiencias', reviewRouter);
+app.use('/vista-experiencias', vistaReviewRouter);
+app.use('/vista-anfitriones', vistaAnfitrionRouter);
+app.use('/vista-viajeros', vistaViajerosRouter);
+app.use('/comentarios', comentarioRouter);
+app.use('/fotos', fotoRouter);
 
 const port = 3000;
 app.listen(port, ()=>console.log("Listening on port "+port));

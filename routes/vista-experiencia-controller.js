@@ -18,14 +18,14 @@ const upload = multer({ storage: storage }).single('file');
 
 //get all
 router.get('/', (req, res, next) => {
-    modelo.Usuario.findAll()
+    modelo.VistaExperiencia.findAll()
         .then(lista => res.json({ ok: true, data: lista }))
         .catch(err => res.json({ ok: false, error: err }));
 });
 
-//post usuario
+//post experiencia
 router.post('/', (req, res, next) => {
-    modelo.Usuario.create(req.body)
+    modelo.Experiencia.create(req.body)
         .then(item => res.json({ ok: true, data: item }))
         .catch(err => res.json({ ok: false, error: err }));
 });

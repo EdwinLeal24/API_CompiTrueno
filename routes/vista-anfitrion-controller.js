@@ -16,18 +16,18 @@ const storage = multer.diskStorage({
 
 const upload = multer({ storage: storage }).single('file');
 
-//get all
+//get all from vista_anfitriones
 router.get('/', (req, res, next) => {
-    modelo.Usuario.findAll()
+    modelo.vista_anfitrion.findAll()
         .then(lista => res.json({ ok: true, data: lista }))
         .catch(err => res.json({ ok: false, error: err }));
 });
 
-//post usuario
+//post anfitrion table
 router.post('/', (req, res, next) => {
-    modelo.Usuario.create(req.body)
-        .then(item => res.json({ ok: true, data: item }))
-        .catch(err => res.json({ ok: false, error: err }));
+    modelo.Anfitrion.create(req.body)
+        .then(item => res.json(item))
+        .catch(err => res.json({ error: err }));
 });
 
 module.exports = router;

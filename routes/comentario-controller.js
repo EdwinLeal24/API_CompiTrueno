@@ -16,18 +16,18 @@ const storage = multer.diskStorage({
 
 const upload = multer({ storage: storage }).single('file');
 
-//get all
+//get all from comentario table
 router.get('/', (req, res, next) => {
-    modelo.Usuario.findAll()
+    modelo.Comentario.findAll()
         .then(lista => res.json({ ok: true, data: lista }))
         .catch(err => res.json({ ok: false, error: err }));
 });
 
-//post usuario
+//post comentario table
 router.post('/', (req, res, next) => {
-    modelo.Usuario.create(req.body)
-        .then(item => res.json({ ok: true, data: item }))
-        .catch(err => res.json({ ok: false, error: err }));
+    modelo.Comentario.create(req.body)
+        .then(item => res.json(item))
+        .catch(err => res.json({ error: err }));
 });
 
 module.exports = router;
