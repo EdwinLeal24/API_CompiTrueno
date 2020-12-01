@@ -23,6 +23,14 @@ router.get('/', (req, res, next) => {
         .catch(err => res.json({ ok: false, error: err }));
 });
 
+//get pais
+router.get('/:nombre', (req, res, next) => {
+    let nombrepais = req.params.nombre;
+    modelo.Pais.findOne({ where: { nombre: nombrepais } })
+        .then(item => res.json({ ok: true, data: item }))
+        .catch(err => res.json({ ok: false, error: err }));
+});
+
 //post pais
 router.post('/', (req, res, next) => {
     modelo.Pais.create(req.body)

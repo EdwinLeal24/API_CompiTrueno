@@ -16,6 +16,13 @@ const storage = multer.diskStorage({
 })
 const upload = multer({ storage: storage }).single('file');
 
+//devuelve todas las fotos
+router.get('/', (req, res, next) => {
+    modelo.Foto.findAll()
+        .then(lista => res.json(lista))
+        .catch(err => res.json({ ok: false, error: err }));
+});
+
 // nueva foto!
 // en el body llega la foto (archivo), el título y el comentario
 router.post('/', (req, res, next) => {
