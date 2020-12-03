@@ -7,6 +7,7 @@ const vistaAnfitrionRouter = require('./routes/vista-anfitrion-controller');
 const vistaViajerosRouter = require('./routes/vista-viajeros-controller');
 const comentarioRouter = require('./routes/comentario-controller');
 const fotoRouter = require('./routes/foto-controller');
+const loginRouter = require('./routes/login-controller');
 
 const logger = require('morgan');
 const cors = require('cors');
@@ -27,6 +28,7 @@ app.use('/vista-anfitriones', vistaAnfitrionRouter);
 app.use('/vista-viajeros', vistaViajerosRouter);
 app.use('/comentarios', comentarioRouter);
 app.use('/fotos', fotoRouter);
+app.use('/login', loginRouter);
 
-const port = 3000;
+const port = 3003;
 app.listen(port, ()=>console.log("Listening on port "+port));

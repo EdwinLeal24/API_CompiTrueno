@@ -23,6 +23,13 @@ router.get('/', (req, res, next) => {
         .catch(err => res.json({ ok: false, error: err }));
 });
 
+router.get('/:id', (req, res, next) => {
+    const pais = req.params.id
+    modelo.VistaExperiencia.findOne({ where: { pais_id: pais }})
+        .then(lista => res.json({ ok: true, data: lista }))
+        .catch(err => res.json({ ok: false, error: err }));
+});
+
 //post experiencia
 router.post('/', (req, res, next) => {
     modelo.Experiencia.create(req.body)
