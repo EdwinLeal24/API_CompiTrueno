@@ -10,21 +10,19 @@ const storage = multer.diskStorage({
         cb(null, 'uploads')
     },
     filename: function (req, file, cb) {
-        //definimos que los nombres de foto tendrán como prefijo el timestamp actual
         cb(null, Date.now() + '-' + file.originalname)
     }
 })
 const upload = multer({ storage: storage }).single('file');
 
-//devuelve todas las fotos
+// get fotos
 router.get('/', (req, res, next) => {
     modelo.Foto.findAll()
         .then(lista => res.json(lista))
         .catch(err => res.json({ ok: false, error: err }));
 });
 
-// nueva foto!
-// en el body llega la foto (archivo), el título y el comentario
+// post fotos
 router.post('/', (req, res, next) => {
     upload(req, res, function (err) {
         if (err instanceof multer.MulterError) {
@@ -39,6 +37,14 @@ router.post('/', (req, res, next) => {
         .then(item => res.json({ ok: true, data: item }))
         .catch(err => res.json({ ok: false, error: err }));
     })
+});
+
+// eliminar foto
+router.delete('/:id', (req, res, next) => {
+    let idfoto = req.params.id;
+    modelo.Foto.destroy({ where: { id: idfoto } })
+        .then(item => res.json(item))
+        .catch(err => res.json({ ok: false, error: err }));
 });
 
 module.exports = router;

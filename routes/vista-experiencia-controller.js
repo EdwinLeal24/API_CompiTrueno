@@ -3,19 +3,6 @@ const router = express.Router();
 
 const modelo = require('../models/index.js');
 
-const multer = require('multer');
-
-const storage = multer.diskStorage({
-    destination: function (req, file, cb) {
-        cb(null, 'uploads')
-    },
-    filename: function (req, file, cb) {
-        cb(null, Date.now() + '-' + file.originalname)
-    }
-})
-
-const upload = multer({ storage: storage }).single('file');
-
 //get all
 router.get('/', (req, res, next) => {
     modelo.VistaExperiencia.findAll()
@@ -33,6 +20,15 @@ router.get('/:id', (req, res, next) => {
 //post experiencia
 router.post('/', (req, res, next) => {
     modelo.Experiencia.create(req.body)
+        .then(item => res.json({ ok: true, data: item }))
+        .catch(err => res.json({ ok: false, error: err }));
+});
+
+//put experiencia
+router.put('/:id', (req, res, next) => {
+    let idExperiencia = req.params.id;
+    modelo.Experiencia.findOne({ where: { id: idExperiencia } })
+        .then(item => item.update(req.body))
         .then(item => res.json({ ok: true, data: item }))
         .catch(err => res.json({ ok: false, error: err }));
 });
