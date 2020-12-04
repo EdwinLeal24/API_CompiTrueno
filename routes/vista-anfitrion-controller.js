@@ -10,6 +10,14 @@ router.get('/', (req, res, next) => {
         .catch(err => res.json({ ok: false, error: err }));
 });
 
+//get by idPais from vista_anfitriones
+router.get('/:id', (req, res, next) => {
+    let idpais = req.params.id;
+    modelo.vista_anfitrion.findAll({ where: { pais_id: idpais }})
+        .then(lista => res.json({ ok: true, data: lista }))
+        .catch(err => res.json({ ok: false, error: err }));
+});
+
 //post anfitrion table
 router.post('/', (req, res, next) => {
     modelo.Anfitrion.create(req.body)
