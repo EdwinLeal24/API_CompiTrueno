@@ -23,12 +23,11 @@ app.use(cors());
 app.use('/', indexRouter);
 app.use('/usuarios', usuarioRouter);
 app.use('/paises', paisRouter);
-app.use('/vista-experiencias', vistaReviewRouter);
-app.use('/vista-anfitriones', vistaAnfitrionRouter);
-app.use('/vista-viajeros', vistaViajerosRouter);
+app.use('/experiencias', vistaReviewRouter);
+app.use('/anfitriones', vistaAnfitrionRouter);
+app.use('/viajeros', vistaViajerosRouter);
 app.use('/comentarios', comentarioRouter);
 app.use('/fotos', fotoRouter);
-app.use('/login', loginRouter);
 
-const port = 3003;
+const port = 3000;
 app.listen(port, ()=>console.log("Listening on port "+port));

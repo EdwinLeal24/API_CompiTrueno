@@ -6,8 +6,10 @@ module.exports = (sequelize, DataTypes) => {
     nombre: DataTypes.STRING,
     apellidos: DataTypes.STRING,
     foto: DataTypes.STRING,
+    calificacion: DataTypes.INTEGER,
     descripcion: DataTypes.STRING,
-    fecha: DataTypes.DATE
+    fecha: DataTypes.DATE,
+    pais_id: DataTypes.INTEGER
   
   }, { tableName: 'vista_reviews', timestamps: false });
   
