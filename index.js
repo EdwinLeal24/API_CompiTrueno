@@ -7,7 +7,6 @@ const vistaAnfitrionRouter = require('./routes/vista-anfitrion-controller');
 const vistaViajerosRouter = require('./routes/vista-viajeros-controller');
 const comentarioRouter = require('./routes/comentario-controller');
 const fotoRouter = require('./routes/foto-controller');
-const loginRouter = require('./routes/login-controller');
 
 const logger = require('morgan');
 const cors = require('cors');
