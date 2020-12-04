@@ -10,16 +10,16 @@ router.get('/', (req, res, next) => {
         .catch(err => res.json({ ok: false, error: err }));
 });
 
-router.get('/:pais_id', (req, res, next) => {
+router.get('/pais/:pais_id', (req, res, next) => {
     const pais = req.params.pais_id
-    modelo.VistaExperiencia.findOne({ where: { pais_id: pais }})
+    modelo.VistaExperiencia.findAll({ where: { pais_id: pais }})
         .then(lista => res.json({ ok: true, data: lista }))
         .catch(err => res.json({ ok: false, error: err }));
 });
 
 router.get('/user/:id', (req, res, next) => {
     const id_usuario = req.params.id
-    modelo.VistaExperiencia.findOne({ where: { id: id_usuario }})
+    modelo.VistaExperiencia.findAll({ where: { id: id_usuario }})
         .then(lista => res.json({ ok: true, data: lista }))
         .catch(err => res.json({ ok: false, error: err }));
 });
