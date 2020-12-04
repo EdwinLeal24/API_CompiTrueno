@@ -3,6 +3,7 @@
 module.exports = (sequelize, DataTypes) => {
   const vista_viajeros = sequelize.define('vista_viajeros', {
    
+    pais_id: DataTypes.INTEGER,
     nombre: DataTypes.STRING,
     apellidos: DataTypes.STRING,
     foto: DataTypes.STRING,
