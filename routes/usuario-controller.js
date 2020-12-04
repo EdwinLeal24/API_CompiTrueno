@@ -39,18 +39,33 @@ router.post('/', (req, res, next) => {
             foto: req.file.filename
         }
         modelo.Usuario.create(nuevoUsuario)
-        .then(item => res.json({ ok: true, data: item }))
-        .catch(err => res.json({ ok: false, error: err }));
+            .then(item => res.json({ ok: true, data: item }))
+            .catch(err => res.json({ ok: false, error: err }));
     })
 });
 
 //put usuario
 router.put('/:id', (req, res, next) => {
-    let idUsuario = req.params.id;
-    modelo.Usuario.findOne({ where: { id: idUsuario } })
-        .then(item => item.update(req.body))
-        .then(item => res.json({ ok: true, data: item }))
-        .catch(err => res.json({ ok: false, error: err }));
+    upload(req, res, function (err) {
+        if (err instanceof multer.MulterError) {
+            return res.status(500).json(err)
+        } else if (err) {
+            return res.status(500).json(err)
+        }
+        const nuevoUsuario = {
+            nombre: req.body.nombre,
+            apellidos: req.body.apellidos,
+            nacimiento: req.body.nacimiento,
+            correo: req.body.correo,
+            contrasenya: req.body.contrasenya,
+            foto: req.file.filename
+        }
+        let idUsuario = req.params.id;
+        modelo.Usuario.findOne({ where: { id: idUsuario } })
+            .then(item => item.update(nuevoUsuario))
+            .then(item => res.json({ ok: true, data: item }))
+            .catch(err => res.json({ ok: false, error: err }));
+    })
 });
 
 module.exports = router;
