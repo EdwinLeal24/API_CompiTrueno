@@ -34,4 +34,20 @@ router.put('/:id', (req, res, next) => {
         .catch(err => res.json({ ok: false, error: err }));
 });
 
+
+//get by id_usuario from vista_anfitriones_guardados
+router.get('/guardados/:id', (req, res, next) => {
+    let idusuario = req.params.id;
+    modelo.AnfitrionGuardado.findAll({ where: { usuario_id: idusuario }})
+        .then(lista => res.json({ ok: true, data: lista }))
+        .catch(err => res.json({ ok: false, error: err }));
+});
+
+//post anfitrion guardado table
+router.post('/guardados', (req, res, next) => {
+    modelo.AnfitrionGuardado.create(req.body)
+        .then(item => res.json(item))
+        .catch(err => res.json({ error: err }));
+});
+
 module.exports = router;

@@ -22,6 +22,14 @@ router.get('/', (req, res, next) => {
         .catch(err => res.json({ ok: false, error: err }));
 });
 
+//get by id
+router.get('/:id', (req, res, next) => {
+    let idusuario = req.params.id;
+    modelo.Usuario.findOne({ where: { id: idusuario } })
+        .then(lista => res.json({ ok: true, data: lista }))
+        .catch(err => res.json({ ok: false, error: err }));
+});
+
 //post usuario
 router.post('/', (req, res, next) => {
     upload(req, res, function (err) {
