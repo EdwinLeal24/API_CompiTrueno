@@ -34,5 +34,19 @@ router.put('/:id', (req, res, next) => {
         .catch(err => res.json({ ok: false, error: err }));
 });
 
+//get by id_usuario from vista_viajeros_guardados
+router.get('/guardados/:id', (req, res, next) => {
+    let idusuario = req.params.id;
+    modelo.ViajeroGuardado.findAll({ where: { usuario_id: idusuario }})
+        .then(lista => res.json({ ok: true, data: lista }))
+        .catch(err => res.json({ ok: false, error: err }));
+});
+
+//post viajero guardado table
+router.post('/guardados', (req, res, next) => {
+    modelo.ViajeroGuardado.create(req.body)
+        .then(item => res.json(item))
+        .catch(err => res.json({ error: err }));
+});
 
 module.exports = router;
