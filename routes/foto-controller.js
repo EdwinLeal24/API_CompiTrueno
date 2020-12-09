@@ -22,6 +22,15 @@ router.get('/', (req, res, next) => {
         .catch(err => res.json({ ok: false, error: err }));
 });
 
+// get fotos por id de usuario
+router.get('/:id', (req, res, next) => {
+    const id_usuario = req.params.id
+    modelo.Foto.findAll({ where: { usuario_id: id_usuario }})
+        .then(lista => res.json({ ok: true, data: lista }))
+        .catch(err => res.json({ ok: false, error: err }));
+});
+
+
 // post fotos
 router.post('/', (req, res, next) => {
     upload(req, res, function (err) {
