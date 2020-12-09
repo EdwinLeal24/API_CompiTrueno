@@ -76,4 +76,13 @@ router.put('/:id', (req, res, next) => {
     })
 });
 
+//Get de los comentarios recibidos de un usuario 
+router.get('/coment/:id', (req, res, next) => {
+    let idusuario = req.params.id;
+    modelo.Usuario.findOne({ where: { receptor_id: idusuario } })
+        .then(lista => res.json({ ok: true, data: lista }))
+        .catch(err => res.json({ ok: false, error: err }));
+});
+
+
 module.exports = router;
