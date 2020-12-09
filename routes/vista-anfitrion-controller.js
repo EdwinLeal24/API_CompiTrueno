@@ -18,6 +18,14 @@ router.get('/:id', (req, res, next) => {
         .catch(err => res.json({ ok: false, error: err }));
 });
 
+//get by idUsuario from vista_anfitriones
+router.get('/usuario/:id', (req, res, next) => {
+    let idUsuario = req.params.id;
+    modelo.vista_anfitrion.findAll({ where: { id: idUsuario }})
+        .then(lista => res.json({ ok: true, data: lista }))
+        .catch(err => res.json({ ok: false, error: err }));
+});
+
 //post anfitrion table
 router.post('/', (req, res, next) => {
     modelo.Anfitrion.create(req.body)

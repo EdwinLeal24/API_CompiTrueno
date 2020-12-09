@@ -78,8 +78,8 @@ router.put('/:id', (req, res, next) => {
 
 //Get de los comentarios recibidos de un usuario 
 router.get('/coment/:id', (req, res, next) => {
-    let idusuario = req.params.id;
-    modelo.Usuario.findOne({ where: { receptor_id: idusuario } })
+    let iduser = req.params.id;
+    modelo.ComentRecibidos.findAll({ where: { receptor_id: iduser } })
         .then(lista => res.json({ ok: true, data: lista }))
         .catch(err => res.json({ ok: false, error: err }));
 });

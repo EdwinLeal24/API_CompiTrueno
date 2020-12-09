@@ -1,14 +1,14 @@
 {
   "development": {
     "username": "root",
-    "password": "Edis%2020",
+    "password": "Edis%2630",
     "database": "compitrueno_bd",
     "host": "192.168.64.2",
     "dialect": "mysql"
   },
   "test": {
     "username": "root",
-    "password": "Edis%2020",
+    "password": "Edis%2630",
     "database": "compitrueno_bd",
     "host": "192.168.64.2",
     "dialect": "mysql",
@@ -16,7 +16,7 @@
   },
   "production": {
     "username": "root",
-    "password": "Edis%2020",
+    "password": "Edis%2630",
     "database": "compitrueno_bd",
     "host": "192.168.64.2",
     "dialect": "mysql",

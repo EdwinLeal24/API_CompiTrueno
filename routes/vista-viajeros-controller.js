@@ -10,10 +10,18 @@ router.get('/', (req, res, next) => {
         .catch(err => res.json({ ok: false, error: err }));
 });
 
-//get by id from vista_viajeros
+//get by id del pais from vista_viajeros
 router.get('/:id', (req, res, next) => {
     let idpais = req.params.id;
     modelo.vista_viajeros.findAll({ where: { pais_id: idpais }})
+        .then(lista => res.json({ ok: true, data: lista }))
+        .catch(err => res.json({ ok: false, error: err }));
+});
+
+//get by id del USUARIO from vista_viajeros
+router.get('/usuario/:id', (req, res, next) => {
+    let idUsuario = req.params.id;
+    modelo.vista_viajeros.findAll({ where: { id: idUsuario }})
         .then(lista => res.json({ ok: true, data: lista }))
         .catch(err => res.json({ ok: false, error: err }));
 });
@@ -28,7 +36,7 @@ router.post('/', (req, res, next) => {
 //put viajero
 router.put('/:id', (req, res, next) => {
     let idViajero = req.params.id;
-    modelo.Viajero.findOne({ where: { id: idViajero } })
+    modelo.Viajeros.findOne({ where: { id: idViajero } })
         .then(item => item.update(req.body))
         .then(item => res.json({ ok: true, data: item }))
         .catch(err => res.json({ ok: false, error: err }));
