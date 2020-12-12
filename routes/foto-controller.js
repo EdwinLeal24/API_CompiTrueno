@@ -40,7 +40,9 @@ router.post('/', (req, res, next) => {
             return res.status(500).json(err)
         }
         const nuevaFoto = {
-            url: req.file.filename
+            url: req.file.filename,
+            pais_id: req.body.pais_id,
+            usuario_id: req.body.usuario_id
         }
         modelo.Foto.create(nuevaFoto)
         .then(item => res.json({ ok: true, data: item }))
