@@ -2,7 +2,7 @@ const express = require('express');
 const router = express.Router();
 
 const modelo = require('../models/index.js');
-
+const bcrypt = require('bcrypt');
 const multer = require('multer');
 
 const storage = multer.diskStorage({
@@ -30,7 +30,7 @@ router.get('/:id', (req, res, next) => {
         .catch(err => res.json({ ok: false, error: err }));
 });
 
-//post usuario
+//post usuario registro
 router.post('/', (req, res, next) => {
     upload(req, res, function (err) {
         if (err instanceof multer.MulterError) {
@@ -38,19 +38,67 @@ router.post('/', (req, res, next) => {
         } else if (err) {
             return res.status(500).json(err)
         }
+
+        const hash = bcrypt.hashSync(req.body.contrasenya, 10);
+        //reemplazamos el password con su versión encriptada
+        req.body.contrasenya = hash;
+
         const nuevoUsuario = {
             nombre: req.body.nombre,
             apellidos: req.body.apellidos,
             nacimiento: req.body.nacimiento,
             correo: req.body.correo,
             contrasenya: req.body.contrasenya,
-            foto: req.file.filename
+            foto: req.file.filename //DATO FOTO PARA TESTEAR EN POSTMAN, CAMBIAR FOTO POR FILE
         }
+        
+
         modelo.Usuario.create(nuevoUsuario)
+            .then((item) => item.save())
             .then(item => res.json({ ok: true, data: item }))
             .catch(err => res.json({ ok: false, error: err }));
     })
 });
+
+/* POST LOGIN */
+router.post('/login', (req, res) => {
+    //leemos nombre y password del body
+    const { correo, contrasenya } = req.body;
+    // si nombre / password no se han facilitado devolvemos error con código de estado 400
+    if (!correo || !contrasenya) {
+      return res.status(400).json({ ok: false, error: "correo o contraseña no recibidos" });
+    }
+  
+    //buscamos usuario y comprobamos si password coincide
+    //findOne es un método de sequelize, si no encuentra nada devolverá error
+    modelo.Usuario.findOne({ where: { correo } })
+      .then((usuario) => {
+        //comparamos el password recibido con el password del usuario guardado en bdd, ambos encriptados
+        if (bcrypt.compareSync(contrasenya, usuario.contrasenya)) {
+          //si ok, devolvemos usuario a siguiente "then" 
+          return usuario;
+        } else {
+          // si no coinciden pasamos msg error a "catch"
+          throw "La contraseña no coincide";
+        }
+      })
+      .then((usuario) => {
+        //ok, login correcto, creamos un token aleatorio
+        let token = '';
+        const caracteresPossibles = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+        const longitud = 15;
+        for (var i = 0; i < longitud; i++) {
+          token += caracteresPossibles.charAt(
+            Math.floor(Math.random() * caracteresPossibles.length)
+          );
+        }
+        //devolvemos un nuevo objeto "token" al siguiente then, que incluye id y nombre de usuario
+        return modelo.Token.create({ token, usuario_id: usuario.id })
+      })
+      .then((token) => res.json({ ok: true, data: token })) //enviamos respuesta con el token completo en json
+      .catch((error) => res.json({ ok: false, error: "error en el ultimo catch" + error }));
+  
+  });
 
 //put usuario
 router.put('/:id', (req, res, next) => {
