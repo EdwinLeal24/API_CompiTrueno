@@ -52,7 +52,7 @@ router.put('/:id', (req, res, next) => {
 //get by id_usuario from vista_viajeros_guardados
 router.get('/guardados/:id', (req, res, next) => {
     let idusuario = req.params.id;
-    modelo.ViajeroGuardado.findAll({ where: { usuario_id: idusuario } })
+    modelo.VistaViajeroGuardado.findAll({ where: { usuario_id: idusuario } })
         .then(lista => res.json({ ok: true, data: lista }))
         .catch(err => res.json({ ok: false, error: err }));
 });

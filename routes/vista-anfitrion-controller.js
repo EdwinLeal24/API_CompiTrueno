@@ -60,7 +60,7 @@ router.put('/:id', (req, res, next) => {
 
 router.get('/guardados/:id', (req, res, next) => {
     let idusuario = req.params.id;
-    modelo.AnfitrionGuardado.findAll({ where: { usuario_id: idusuario }})
+    modelo.VistaAnfitrionGuardado.findAll({ where: { usuario_id: idusuario }})
         .then(lista => res.json({ ok: true, data: lista }))
         .catch(err => res.json({ ok: false, error: err }));
 });

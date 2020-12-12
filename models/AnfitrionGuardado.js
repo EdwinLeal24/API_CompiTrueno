@@ -4,21 +4,9 @@ module.exports = (sequelize, DataTypes) => {
   const AnfitrionGuardado = sequelize.define('AnfitrionGuardado', {
    
     usuario_id: DataTypes.INTEGER,
-    id: {
-      type: DataTypes.INTEGER,
-      primaryKey: true,
-      unique: false
-    },
-    pais_id: DataTypes.INTEGER,
-    nombre: DataTypes.STRING,
-    apellidos: DataTypes.STRING,
-    nacimiento: DataTypes.DATE,
-    foto: DataTypes.STRING,
-    estrellitas: DataTypes.INTEGER,
-    ciudad: DataTypes.STRING,
-    descripcion: DataTypes.STRING
+    anfitrion_id: DataTypes.INTEGER
   
-  }, { tableName: 'vista_anfitriones_guardados', timestamps: false });
+  }, { tableName: 'anfitriones_guardados', timestamps: false });
   
   return AnfitrionGuardado;
 };
