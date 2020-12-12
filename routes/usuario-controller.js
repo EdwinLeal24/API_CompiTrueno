@@ -100,6 +100,21 @@ router.post('/login', (req, res) => {
   
   });
 
+  /* METODO DELETE PARA HACER LOGOUT */
+  
+  router.delete('/logout',  (req, res) => {
+    const {token } = req.body;
+    //si no existe el token no aceptamos logout
+    if (!token) {
+      return res.status(400).json({ok:false, error:"token no recibido"});
+    }
+    // si lo recibimos, intentamos eliminarlo
+    modelo.Token.destroy({ where: { token } })
+    .then(()=>res.json({ok:true}))
+    .catch((error)=>res.json({ok:false, error:error}));
+
+  });
+
 //put usuario
 router.put('/:id', (req, res, next) => {
     upload(req, res, function (err) {
