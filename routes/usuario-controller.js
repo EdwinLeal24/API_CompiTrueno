@@ -93,7 +93,7 @@ router.post('/login', (req, res) => {
           );
         }
         //devolvemos un nuevo objeto "token" al siguiente then, que incluye id y nombre de usuario
-        return modelo.Token.create({ token, usuario_id: usuario.id })
+        return modelo.Token.create({ token, usuario_id: usuario.id, nombre: usuario.nombre })
       })
       .then((token) => res.json({ ok: true, data: token })) //enviamos respuesta con el token completo en json
       .catch((error) => res.json({ ok: false, error: "error en el ultimo catch" + error }));
@@ -101,7 +101,7 @@ router.post('/login', (req, res) => {
   });
 
   /* METODO DELETE PARA HACER LOGOUT */
-  
+
   router.delete('/logout',  (req, res) => {
     const {token } = req.body;
     //si no existe el token no aceptamos logout
