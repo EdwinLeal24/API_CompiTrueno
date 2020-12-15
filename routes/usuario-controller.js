@@ -128,8 +128,7 @@ router.put('/:id', (req, res, next) => {
             apellidos: req.body.apellidos,
             nacimiento: req.body.nacimiento,
             correo: req.body.correo,
-            contrasenya: req.body.contrasenya,
-            foto: req.file.filename
+            contrasenya: req.body.contrasenya
         }
         let idUsuario = req.params.id;
         modelo.Usuario.findOne({ where: { id: idUsuario } })
