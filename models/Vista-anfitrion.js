@@ -11,6 +11,7 @@ module.exports = (sequelize, DataTypes) => {
     estrellitas: DataTypes.INTEGER,
     ciudad: DataTypes.STRING,
     descripcion: DataTypes.STRING,
+    ida: DataTypes.INTEGER
   
   }, { tableName: 'vista_anfitriones', timestamps: false });
 
