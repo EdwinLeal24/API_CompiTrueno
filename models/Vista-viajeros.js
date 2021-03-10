@@ -12,7 +12,7 @@ module.exports = (sequelize, DataTypes) => {
     descripcion: DataTypes.STRING,
     fecha: DataTypes.DATE,
     presupuesto: DataTypes.INTEGER,
-    idv: DataTypes.INTEGER
+    //idv: DataTypes.INTEGER
   
   }, { tableName: 'vista_viajeros', timestamps: false });
   

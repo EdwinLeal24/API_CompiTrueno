@@ -27,6 +27,12 @@ app.use('/anfitriones', vistaAnfitrionRouter);
 app.use('/viajeros', vistaViajerosRouter);
 app.use('/comentarios', comentarioRouter);
 app.use('/fotos', fotoRouter);
+app.use((request, response) => {
+    response.status(404).json({
+        error: 'Esta ruta no existe'
+    })
+})
 
-const port = 3000;
+const port = 3001;
 app.listen(port, ()=>console.log("Listening on port "+port));
+ 
